@@ -53,16 +53,18 @@ export class HomeComponent implements OnInit {
 
 
   deleteUser(closeConfirmModal: HTMLButtonElement) {
-    this.userService.deleteUser(this.userId).subscribe(
-      result => {
-        this.showAllUser();
-        closeConfirmModal.click();
-        if (this.userId == this.currentUserId) {
-          this.logout();
+    if (this.token) {
+      this.userService.deleteUser(this.userId , this.token).subscribe(
+        result => {
+          this.showAllUser();
+          closeConfirmModal.click();
+          if (this.userId == this.currentUserId) {
+            this.logout();
+          }
+        }, error => {
+          console.log(error);
         }
-      }, error => {
-        console.log(error);
-      }
-    );
+      );
+    }
   }
 }

@@ -1,1 +1,80 @@
-<p>update works!</p>
+<div *ngIf="token">
+<article *ngIf="user"  class="card-body mx-auto" style="max-width: 400px; padding-top: 100px">
+  <h4 class="card-title mt-3 text-center text-info">Update User</h4>
+  <p class="divider-text">
+    <br/>
+  </p>
+  <form>
+    <label class="col text-info">
+      Full Name
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+        </div>
+        <input name="name" class="form-control" [(ngModel)]="user.name" type="text">
+      </div> <!-- form-group// -->
+    </label>
+    <label class="col text-info">
+      Email
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+        </div>
+        <input type="email" [(ngModel)]="user.email" name="email"
+               class="form-control" id="basic-url">
+      </div> <!-- form-group// -->
+    </label>
+    <label class="col text-info">
+      Password
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+        </div>
+
+        <input name="Password" class="form-control" placeholder="**************" type="password">
+        <button data-toggle="modal"
+                data-target="#changpass" >Change Password</button>
+      </div> <!-- form-group// -->
+    </label>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-block" (click)="updateProfileUser()"> Save </button>
+    </div> <!-- form-group// -->
+  </form>
+</article>
+</div>
+
+
+<!--Modal Change Password-->
+<div class="modal fade" id="changpass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1"><strong>Update Password</strong></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="pwForm">
+          <div class="form-group">
+            <label  class="col-form-label">Current Password </label>
+            <input formControlName="currentPassword" id="currentPassword" type="password"  class="form-control"  >
+          </div>
+          <div class="form-group">
+            <label  class="col-form-label">New Password</label>
+            <input formControlName="newPassword" type="password"  class="form-control" >
+          </div>
+          <div class="form-group">
+            <label  class="col-form-label">Confirm Password</label>
+            <input formControlName="confirmPassword" type="password"  class="form-control" >
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button #closeModalRef1 type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-info" (click)="updatePassword(closeModalRef1)" >Change Password</button>
+      </div>
+    </div>
+  </div>
+</div>
+
